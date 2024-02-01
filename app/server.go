@@ -1,7 +1,9 @@
 package main
 
 import (
+	"bufio"
 	"fmt"
+
 	// Uncomment this block to pass the first stage
 	"net"
 	"os"
@@ -23,12 +25,13 @@ func main() {
 		fmt.Println("Error accepting connection: ", err.Error())
 		os.Exit(1)
 	}
-	for {
-		_, err := conn.Read([]byte{})
-		if err != nil {
-			fmt.Println("Error reading from connection")
-		}
-		conn.Write([]byte("+PONG\r\n"))
-	}
 
+	scanner := bufio.NewScanner(conn)
+	for scanner.Scan() {
+		char := scanner.Text()
+		if char == "\n" {
+			conn.Write([]byte("+PONG\r\n"))
+		}
+	}
+	conn.Write([]byte("+PONG\r\n"))
 }
