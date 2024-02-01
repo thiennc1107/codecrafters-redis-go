@@ -32,9 +32,9 @@ func main() {
 	for scanner.Scan() {
 		char := scanner.Text()
 		buffer.WriteString(char)
-		if buffer.Len() == 4 {
-			buffer.Reset()
+		if buffer.Len() == 4 && buffer.String() == "ping" {
 			conn.Write([]byte("+PONG\r\n"))
+			buffer.Reset()
 		}
 	}
 }
