@@ -1,9 +1,7 @@
 package main
 
 import (
-	"bufio"
 	"fmt"
-	"strings"
 
 	// Uncomment this block to pass the first stage
 	"net"
@@ -27,14 +25,14 @@ func main() {
 		os.Exit(1)
 	}
 
-	scanner := bufio.NewScanner(conn)
-	buffer := strings.Builder{}
-	for scanner.Scan() {
-		char := scanner.Text()
-		buffer.WriteString(char)
-		if buffer.Len() == 4 {
-			buffer.Reset()
-		}
-	}
+	// scanner := bufio.NewScanner(conn)
+	// buffer := strings.Builder{}
+	// for scanner.Scan() {
+	// 	char := scanner.Text()
+	// 	buffer.WriteString(char)
+	// 	if buffer.Len() == 4 {
+	// 		buffer.Reset()
+	// 	}
+	// }
 	conn.Write([]byte("+PONG\r\n"))
 }
