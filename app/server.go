@@ -33,8 +33,8 @@ func main() {
 		char := scanner.Text()
 		buffer.WriteString(char)
 		if buffer.Len() == 4 {
-			conn.Write([]byte("+PONG\r\n"))
 			buffer.Reset()
 		}
 	}
+	conn.Write([]byte("+PONG\r\n"))
 }
