@@ -31,6 +31,7 @@ func main() {
 	buffer := strings.Builder{}
 	for scanner.Scan() {
 		char := scanner.Text()
+		fmt.Println(char)
 		buffer.WriteString(char)
 		if buffer.Len() == 4 && buffer.String() == "ping" {
 			conn.Write([]byte("+PONG\r\n"))
