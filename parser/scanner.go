@@ -5,6 +5,7 @@ import (
 	"context"
 	"fmt"
 	"io"
+	"log"
 	"strconv"
 
 	"github.com/codecrafters-io/redis-starter-go/handler"
@@ -14,19 +15,19 @@ func ReadCommand(ctx context.Context, stream io.Reader) (handler.Command, error)
 	scanner := bufio.NewScanner(stream)
 	scanner.Split(bufio.ScanLines)
 	cmd := handler.Command{}
-
+	log.Println("scanning arg length")
 	l, err := scanArgsLength(scanner)
 	if err != nil {
 		return cmd, err
 	}
 	cmd.ArgLength = l
-
+	log.Println("scanning command lenght")
 	n, err := scanCommandName(scanner)
 	if err != nil {
 		return cmd, err
 	}
 	cmd.Name = n
-
+	log.Println("scanning args")
 	args, err := scanCommandArgs(scanner, cmd.ArgLength)
 	if err != nil {
 		return cmd, err
