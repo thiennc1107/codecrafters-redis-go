@@ -8,6 +8,8 @@ import (
 	"os"
 
 	"github.com/codecrafters-io/redis-starter-go/handler"
+	"github.com/codecrafters-io/redis-starter-go/parser"
+	"github.com/codecrafters-io/redis-starter-go/presenter"
 )
 
 func main() {
@@ -26,7 +28,7 @@ func main() {
 			fmt.Println("Error accepting connection: ", err.Error())
 			os.Exit(1)
 		}
-		hdl := handler.Handler{}
+		hdl := handler.NewHandler(parser.ReadCommand, presenter.WriteResponse)
 		go hdl.HandleConnection(conn)
 	}
 }
