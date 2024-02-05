@@ -1,12 +1,13 @@
 package main
 
 import (
-	"bufio"
 	"fmt"
 
 	// Uncomment this block to pass the first stage
 	"net"
 	"os"
+
+	"github.com/codecrafters-io/redis-starter-go/handler"
 )
 
 func main() {
@@ -25,17 +26,7 @@ func main() {
 			fmt.Println("Error accepting connection: ", err.Error())
 			os.Exit(1)
 		}
-		go handleConnection(conn)
-	}
-}
-
-func handleConnection(conn net.Conn) {
-	scanner := bufio.NewScanner(conn)
-
-	for scanner.Scan() {
-		line := scanner.Text()
-		if line == "ping" {
-			conn.Write([]byte("+PONG\r\n"))
-		}
+		hdl := handler.Handler{}
+		go hdl.HandleConnection(conn)
 	}
 }
