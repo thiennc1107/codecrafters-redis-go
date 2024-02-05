@@ -51,9 +51,10 @@ func (h *Handler) HandleConnection(conn net.Conn) {
 	if h.timeOut > 0 {
 		ctx, cancel = context.WithTimeout(ctx, time.Duration(h.timeOut)*time.Second)
 	}
-	h.HandleSession(ctx, cancel, conn)
-
 	defer cancel()
+	for {
+		h.HandleSession(ctx, cancel, conn)
+	}
 }
 
 func FormatErrorFailedToReadCommand(err error) string {
