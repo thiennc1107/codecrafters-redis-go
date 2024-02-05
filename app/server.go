@@ -29,6 +29,6 @@ func main() {
 			os.Exit(1)
 		}
 		hdl := handler.NewHandler(parser.ReadCommand, presenter.WriteResponse)
-		go hdl.HandleConnection(conn)
+		hdl.HandleConnection(conn)
 	}
 }
