@@ -19,12 +19,15 @@ func GetCommandHandler(commandName string) (CommandHandler, error) {
 	switch commandName {
 	case EchoCommand:
 		return &EchoCommandHandler{}, nil
+	case PingCommand:
+		return &PingCommandHandler{}, nil
 	default:
 		return nil, fmt.Errorf("command not found")
 	}
 }
 
 const EchoCommand = "ECHO"
+const PingCommand = "PING"
 
 type EchoCommandHandler struct {
 }
@@ -37,4 +40,11 @@ func (e *EchoCommandHandler) Execute(ctx Context) (string, error) {
 		return "", errors.New(ErrEchoArgumentCount)
 	}
 	return cmd.Args[0], nil
+}
+
+type PingCommandHandler struct {
+}
+
+func (p *PingCommandHandler) Execute(ctx Context) (string, error) {
+	return "PONG", nil
 }

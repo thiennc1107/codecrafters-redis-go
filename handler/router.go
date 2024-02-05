@@ -4,7 +4,6 @@ import (
 	"context"
 	"fmt"
 	"io"
-	"log"
 	"net"
 	"time"
 )
@@ -69,7 +68,6 @@ func (h *Handler) handleCommandError(ctx context.Context, err error, conn io.Rea
 }
 
 func (h *Handler) HandleSession(ctx context.Context, cancelFunc context.CancelFunc, sess io.ReadWriter) {
-	log.Println(h)
 	cmd, err := h.readCommand(ctx, sess)
 	if err != nil {
 		h.handleReadCommandError(ctx, err, sess)
@@ -92,5 +90,4 @@ func (h *Handler) HandleSession(ctx context.Context, cancelFunc context.CancelFu
 	}
 
 	h.writeResponse(ctx, sess, res)
-
 }
