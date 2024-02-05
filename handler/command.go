@@ -27,7 +27,7 @@ func GetCommandHandler(commandName string) (CommandHandler, error) {
 }
 
 const EchoCommand = "ECHO"
-const PingCommand = "PING"
+const PingCommand = "ping"
 
 type EchoCommandHandler struct {
 }

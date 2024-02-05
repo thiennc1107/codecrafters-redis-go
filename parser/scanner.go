@@ -68,7 +68,7 @@ func scanCommandName(scanner *bufio.Scanner) (string, error) {
 
 func scanCommandArgs(scanner *bufio.Scanner, argLength int) ([]string, error) {
 	args := []string{}
-	for n := 0; n <= argLength; n++ {
+	for n := 0; n < argLength*2; n++ {
 		if !scanner.Scan() {
 			return nil, io.ErrUnexpectedEOF
 		}

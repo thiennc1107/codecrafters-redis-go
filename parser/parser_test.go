@@ -38,6 +38,14 @@ func TestReadCommain(t *testing.T) {
 				Args:      []string{"hey"},
 			},
 		},
+		{
+			commandData: []byte("*1\r\n$4\r\nping\r\n"),
+			res: handler.Command{
+				Name:      "ping",
+				ArgLength: 0,
+				Args:      []string{},
+			},
+		},
 	}
 
 	for i, tc := range tcs {
